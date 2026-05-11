@@ -13,13 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Move to deployment directory
+        run: cd /var/www/node-pm2
+
+      - name: Pull latest code
+        run: |
+          cd /var/www/node-pm2
+          git pull origin main
+
       - name: Install dependencies
-        run: npm install --production
+        run: |
+          cd /var/www/node-pm2
+          npm install --production
 
       - name: Start/Restart PM2
         run: |
+          cd /var/www/node-pm2
+
           APP_NAME="node-pm2"
-          ENTRY_FILE="index.js"   # change if needed
+          ENTRY_FILE="index.js"
 
           pm2 describe $APP_NAME > /dev/null 2>&1 && \
           pm2 restart $APP_NAME || \

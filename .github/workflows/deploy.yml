@@ -13,8 +13,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install --production
+      - name: Pull latest code
+        run: |
+          cd ~/node-pm2
+          git pull origin main
 
-      - name: Restart PM2 app
-        run: pm2 restart node-pm2
+      - name: Install dependencies
+        run: |
+          cd ~/node-pm2
+          npm install --production
+
+      - name: Start or Restart PM2 app
+        run: |
+          cd ~/node-pm2
+
+          # CHANGE THIS if your entry file is different
+          ENTRY_FILE="app.js"
+
+          # If PM2 process exists → restart, else start it
+          pm2 describe node-pm2 > /dev/null 2>&1 && \
+          pm2 restart node-pm2 || \
+          pm2 start $ENTRY_FILE --name node-pm2
+
+      - name: Save PM2 process list
+        run: pm2 save

@@ -13,14 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to VM via SSH
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          script: |
-            cd /home/${{ secrets.VM_USER }}/node-cm
-            git pull origin main
-            npm install --production
-            pm2 restart my-node-app
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Restart PM2 app
+        run: pm2 restart my-node-app

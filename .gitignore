@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+build/
+*.class
+*.pyc
+
+# Environment and secrets
+.env
+.env.local
+*.pem
+*.pfx
+
+# Logs
+*.log
+logs/
+
+# IDE and Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System files
+.DS_Store
+Thumbs.db   

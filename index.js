@@ -13,6 +13,6 @@ app.get("/heavy", (req, res) => {
   res.send(`The result of the CPU intensive task is ${total}\n`);
 });
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+app.listen(3000, "0.0.0.0", () => {
+  console.log("Server running on port 3000");
 });

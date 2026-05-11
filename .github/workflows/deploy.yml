@@ -15,25 +15,25 @@ jobs:
 
       - name: Pull latest code
         run: |
-          cd ~/node-pm2
+          cd ~/node-cm
           git pull origin main
 
       - name: Install dependencies
         run: |
-          cd ~/node-pm2
+          cd ~/node-cm
           npm install --production
 
       - name: Start or Restart PM2 app
         run: |
-          cd ~/node-pm2
+          cd ~/node-cm
 
           # CHANGE THIS if your entry file is different
           ENTRY_FILE="app.js"
 
           # If PM2 process exists → restart, else start it
-          pm2 describe node-pm2 > /dev/null 2>&1 && \
-          pm2 restart node-pm2 || \
-          pm2 start $ENTRY_FILE --name node-pm2
+          pm2 describe node-cm > /dev/null 2>&1 && \
+          pm2 restart node-cm || \
+          pm2 start $ENTRY_FILE --name node-cm
 
       - name: Save PM2 process list
         run: pm2 save

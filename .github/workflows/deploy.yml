@@ -35,6 +35,6 @@ jobs:
 
           pm2 describe $APP_NAME > /dev/null 2>&1 && \
           pm2 restart $APP_NAME || \
-          pm2 start $ENTRY_FILE -i max--name $APP_NAME
+          pm2 start $ENTRY_FILE -i max --name $APP_NAME
 
           pm2 save
